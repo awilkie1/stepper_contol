@@ -36,7 +36,7 @@ void receive( byte[] data ) {       // <-- default handler
       String DEVICE_IP = message.substring(25);
   }
   else {
-
+    println(message);
   }
 }
 
