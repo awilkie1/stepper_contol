@@ -198,10 +198,15 @@ class Point {
    int steps = int (distance);//the calculations from length(cm) to steps
    return steps;
   }
+  
+  float getMaxA(){ return udpCableMaxA;}
+  float getMaxB(){ return udpCableMaxB;}
+  float getMinA(){ return udpCableMinA;}
+  float getMinB(){ return udpCableMinB;}
 
   void updateStrand(int val, float distance, int time){
     int steps = lengthConvertion(distance);
-    String command = "stepperInter " + steps + " " + 0.1 + " " + 0.1 + " " + 0.1 + " " + 0.0;
+    String command = "stepperInter " + steps + " " + 0.1 + " " + 0.97 + " " + 0.1 + " " + 0.0;
     if (val ==0){//motor 1
       //stepperDirect(MOTORA, "abcd", steps, time);
       udpBroadcastDirect(command, MOTORA);

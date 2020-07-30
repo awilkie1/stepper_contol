@@ -1,4 +1,4 @@
-import hypermedia.net.*;
+  import hypermedia.net.*;
 
 UDP udp;  // the UDP object
 
@@ -46,6 +46,9 @@ void receive( byte[] data ) {       // <-- default handler
       String DEVICE_IP = list[2];
       println("login: " + DEVICE_MAC + " @ " + DEVICE_IP);
   }
+  if (list[0].equals("accel")){
+      println("accel " + list[1]);
+  }
   if (list[0].equals("update")){
       String DEVICE_MAC = list[1];
       String DEVICE_IP = list[2];
@@ -58,7 +61,23 @@ void receive( byte[] data ) {       // <-- default handler
       
       println("Length " + float(list[3]) + " Min " + float(list[4]) + " Max " + float(list[5]));
   }
+  if (list[0].equals("home")){
+      String DEVICE_MAC = list[1];
+      String DEVICE_IP = list[2];
+      if (DEVICE_IP.equals(MOTORA)){
+       
+      }
+      if (DEVICE_IP.equals(MOTORB)){
+
+      }
+      
+      println("Length " + float(list[3]) + " Min " + float(list[4]) + " Max " + float(list[5]));
+  }
   else {
     println(message);
   }
+}
+void eventCall10(String call, int a, int b, int c, int d, int e, int f, int g, int h, int i) {
+  String command = call + " " + a + " " + b + " " + c + " " + d + " " + e + " " + f + " " + g + " " + h + " " + i;
+  udpBroadcast(command);
 }
