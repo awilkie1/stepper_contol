@@ -3,7 +3,7 @@
 UDP udp;  // the UDP object
 
 int INCOMING_PORT = 9999;//incoming port for host pc
-String BROADCAST_IP = "10.0.2.255";//this is the main brodcast port
+String BROADCAST_IP = "10.0.255.255";//this is the main brodcast port
 String IP = "10.0.2.10";//this is the main brodcast port
 int BROADCAST_PORT = 8888;//for casting to .255
 
@@ -58,8 +58,15 @@ void receive( byte[] data ) {       // <-- default handler
       if (DEVICE_IP.equals(MOTORB)){
         p.udpUpdate(float(list[3]), float(list[4]), float(list[5]), 1);
       }
+    
+      if (DEVICE_IP.equals(MOTORC)){
+        p2.udpUpdate(float(list[3]), float(list[4]), float(list[5]), 0);
+      }
+      if (DEVICE_IP.equals(MOTORD)){
+        p2.udpUpdate(float(list[3]), float(list[4]), float(list[5]), 1);
+      }
       
-      println("Length " + float(list[3]) + " Min " + float(list[4]) + " Max " + float(list[5]));
+      println("max " + float(list[1]) + "IP " + float(list[2]) +"Length " + float(list[3]) + " Min " + float(list[4]) + " Max " + float(list[5]));
   }
   if (list[0].equals("home")){
       String DEVICE_MAC = list[1];

@@ -5,6 +5,8 @@ class Point {
   PVector origina;      // position of arm origin
   float ra;             // Length of arm
   float rb;             // Length of arm
+  
+  float row;
 
   float ballr;         // Ball radius
   float damping;       // Arbitary damping amount
@@ -24,14 +26,14 @@ class Point {
   boolean cableTentionState;
   boolean lastCableTentionState;
   
-  
 
   // This constructor could be improved to allow a greater variety of pendulums
-  Point(PVector origina_, PVector originb_, PVector position_) {
+  Point(int row_, PVector origina_, PVector originb_, PVector position_) {
     // Fill all variables
     origina = origina_;
     originb = originb_;
     position = position_;
+    row = row_;
     ra = (sqrt(pow((origina.x-position.x), 2) + pow((origina.y-position.y), 2)));
     rb = (sqrt(pow((originb.x-position.x), 2) + pow((originb.y-position.y), 2)));
     ballr = 20.0;      // Arbitrary ball radius
@@ -91,8 +93,8 @@ class Point {
     
     //cables
     stroke(255);
-    line((origina.x*scale), (origina.y*scale), (positionCurrent.x*scale), (positionCurrent.y*scale));
-    line((originb.x*scale), (originb.y*scale), (positionCurrent.x*scale), (positionCurrent.y*scale));
+    line((origina.x*scale),(origina.y*scale), (positionCurrent.x*scale), (positionCurrent.y*scale));
+    line((originb.x*scale),(originb.y*scale), (positionCurrent.x*scale), (positionCurrent.y*scale));
 
     //ball
     fill(120);
@@ -103,81 +105,20 @@ class Point {
     stroke(255,50);
     strokeWeight(2);
     line((origina.x*scale), (origina.y*scale), (position.x*scale), (position.y*scale));
-    line((originb.x*scale), (originb.y*scale), (position.x*scale), (position.y*scale));
+    line((originb.x*scale),(originb.y*scale), (position.x*scale), (position.y*scale));
     fill(120,50);
     ellipse((position.x*scale), (position.y*scale), ballr, ballr);
 
 
-    ellipse((origina.x*scale), (origina.y*scale), ((udpCableLengthA*2)*scale), ((udpCableLengthA*2)*scale));
-    ellipse((originb.x*scale), (originb.y*scale), ((udpCableLengthB*2)*scale), ((udpCableLengthB*2)*scale));
+    ellipse((origina.x*scale),(origina.y*scale), ((udpCableLengthA*2)*scale), ((udpCableLengthA*2)*scale));
+    ellipse((originb.x*scale),(originb.y*scale), ((udpCableLengthB*2)*scale), ((udpCableLengthB*2)*scale));
     
     fill(255);
-    text("min A: "+ udpCableMinA, width-200, 20);
-    text("max A: "+ udpCableMaxA, width-100, 20);
-    text("min B: "+ udpCableMinB, width-200, 40);
-    text("max B: "+ udpCableMaxB, width-100, 40);
-    //theta = acos(((length1*length1)+(width1*width1)-(length2*length2))/(2*length1*width1));
-    //float ballY = length1*sin(theta);
-    //float ballX = sqrt((length1*length1)-(ballY*ballY));
     
-    //PYTHA
-    //float angleA = acos((sq(udpCableLengthA) + sq(DISTANCETOP) - sq(udpCableLengthB))/(2*(udpCableLengthA*DISTANCETOP)));
-    //float angleB = acos((sq(udpCableLengthB) + sq(DISTANCETOP) - sq(udpCableLengthA))/(2*(udpCableLengthB*DISTANCETOP)));
-
-    ////float angleA = acos(((udpCableLengthA*udpCableLengthA) + (DISTANCETOP*DISTANCETOP) - (udpCableLengthB*udpCableLengthB))/(2*(udpCableLengthA*DISTANCETOP))));
-    //float Height = (udpCableLengthA)*sin(angleA);
-    //float Width = sqrt((udpCableLengthA*udpCableLengthA)-(Height*Height));
-    ////println(angleA + " : " + angleB);
-    ////println(cableLength.x + " : " + udpCableLengthA);
-
-    //float HeightB = (udpCableLengthB)*sin(angleB);
-    //float WidthB = sqrt((udpCableLengthB*udpCableLengthB)-(HeightB*HeightB));
-
-//    fill(255);
-//    text("L: "+udpCableLengthA, origina.x + 50, origina.y+30);
-//    text(degrees(angleA), origina.x + 50, origina.y+10);
-
-//    text("L: "+udpCableLengthB, originb.x - 50, originb.y+30);
-//    text(degrees(angleB), originb.x - 50, originb.y+10);
-
-//    text(Height, positionCurrent.x/2, positionCurrent.y/2);
-//    line(Width, 0, Width, Height);
-//    ellipse(position.x, Height, 10, 10);
-
-//    text(HeightB, positionCurrent.x/2, positionCurrent.y/2);
-//    line(600-WidthB, 0, 600-WidthB, HeightB);
-//    ellipse(position.x, HeightB, 10, 10);
-
-//    line(originb.x/2, 0, originb.x/2, height);
-
-    //float cableTention = (udpCableLengthA+udpCableLengthB)-DISTANCETOP;
-    //println(cableTention);
-
-    //cable testion code
-    // if (cableTention<=10){
-    //   //println("STOP!!!!");
-    //   cableTentionState = true;
-    //   udpBroadcastDirect("active 1", MOTORA);
-    //   udpBroadcastDirect("active 1", MOTORB);
-    // } else {
-    //   cableTentionState = false;
-    //   udpBroadcastDirect("active 0", MOTORA);
-    //   udpBroadcastDirect("active 0", MOTORB);
-    // }
-    //
-    //if(cableTentionState != lastCableTentionState){
-    //  //if (cableTentionState){
-    //  //  udpBroadcastDirect("active 0", MOTORA);
-    //  //  udpBroadcastDirect("active 0", MOTORB);
-    //  //} else {
-    //  //  udpBroadcastDirect("active 1", MOTORA);
-    //  //  udpBroadcastDirect("active 1", MOTORB);
-    //  //}
-    //  lastCableTentionState = cableTentionState;
-    // }
-
-
-
+    text("min A: "+ udpCableMinA, width-200, 20+(40*row));
+    text("max A: "+ udpCableMaxA, width-100, 20+(40*row));
+    text("min B: "+ udpCableMinB, width-200, 40+(40*row));
+    text("max B: "+ udpCableMaxB, width-100, 40+(40*row));
 }
 
 
@@ -206,15 +147,28 @@ class Point {
 
   void updateStrand(int val, float distance, int time){
     int steps = lengthConvertion(distance);
-    String command = "stepperInter " + steps + " " + 0.1 + " " + 0.97 + " " + 0.1 + " " + 0.0;
+    //String command = "stepperInter " + steps + " " + 0.1 + " " + 0.97 + " " + 0.1 + " " + 0.0;
+    
+    String command = "stepperInter " + steps;
+
     if (val ==0){//motor 1
-      //stepperDirect(MOTORA, "abcd", steps, time);
       udpBroadcastDirect(command, MOTORA);
 
     }
     if (val ==1){//motor 1
       //stepperDirect(MOTORB, "abcd", steps, time);
       udpBroadcastDirect(command, MOTORB);
+      //tcpBroadcastDirect(command, MOTORB);
+
+    }
+    if (val ==2){//motor 1
+      udpBroadcastDirect(command, MOTORC);
+
+    }
+    if (val ==3){//motor 1
+      //stepperDirect(MOTORB, "abcd", steps, time);
+      udpBroadcastDirect(command, MOTORD);
+      //tcpBroadcastDirect(command, MOTORB);
 
     }
   }
