@@ -6,7 +6,7 @@ String tcpInput;
 int tcpData[];
 
 void tcpSetup(){
-  // c = new Client(this, "10.0.2.10", 2704); // Replace with your server's IP and port
+  c = new Client(this, "10.0.2.10", 2704); // Replace with your server's IP and port
   //s = new Server(this, 2704); // Replace with your server's IP and port
 
 }

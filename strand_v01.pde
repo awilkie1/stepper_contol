@@ -6,15 +6,17 @@ int currentTime = 0;
 int startTime = 0;
 boolean start = false;
 float scale = 0.25;
-int distance = 454;
+int distance = 200;
 float DISTANCETOP = 454.0;
 float SHIFTTOP = 0;
-String MOTORA = "10.0.2.79";
+String MOTORA = "10.0.2.65";
 String MOTORB = "10.0.2.78";
 String MOTORC = "10.0.2.2";
 String MOTORD = "10.0.2.3";
 
 int count = 0;
+
+int MICROSTEPPING = 8;
 
 void setup() {
   size(1200,900);
@@ -124,8 +126,8 @@ void keyPressed(){
  //if (key=='-') { p.clicked(width/2,150);}
  //if (key=='=') { p.clicked(680,20);}
 
- if (key=='q') { udpBroadcastDirect("stepperMove " + -distance,CURRENTMOTOR );}
- if (key=='w') { udpBroadcastDirect("stepperMove " + distance, CURRENTMOTOR);}
+ if (key=='q') { udpBroadcastDirect("stepperMove " + -distance + " 3500 2500",CURRENTMOTOR );}
+ if (key=='w') { udpBroadcastDirect("stepperMove " + distance + " 3500 2500", CURRENTMOTOR);}
 
  if (key=='d') { udpBroadcastDirect("home", MOTORA);}
  if (key=='f') { udpBroadcastDirect("home", MOTORB);}
@@ -166,10 +168,10 @@ if (key==';') {
  if (key=='o') { udpBroadcast("ota");}
  if (key== CODED) {
     if (keyCode== LEFT){
-      udpBroadcast("stepperMove " + -distance);
+      udpBroadcast("stepperMove " + -(distance * MICROSTEPPING) + " " + (700 * MICROSTEPPING) + " " + (200* MICROSTEPPING));
     }
     if (keyCode== RIGHT){
-      udpBroadcast("stepperMove " + distance);
+      udpBroadcast("stepperMove " + (distance* MICROSTEPPING) + " " + (700 * MICROSTEPPING) + " " + (200* MICROSTEPPING));
     }
      if (keyCode== UP){
       distance = distance*2;

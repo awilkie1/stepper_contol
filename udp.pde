@@ -66,7 +66,7 @@ void receive( byte[] data ) {       // <-- default handler
         p2.udpUpdate(float(list[3]), float(list[4]), float(list[5]), 1);
       }
       
-      println("max " + float(list[1]) + "IP " + float(list[2]) +"Length " + float(list[3]) + " Min " + float(list[4]) + " Max " + float(list[5]));
+      println("max " + list[1] + "IP " + list[2] + "Length " + float(list[3]) + " Min " + float(list[4]) + " Max " + float(list[5]));
   }
   if (list[0].equals("home")){
       String DEVICE_MAC = list[1];
@@ -81,7 +81,7 @@ void receive( byte[] data ) {       // <-- default handler
       println("Length " + float(list[3]) + " Min " + float(list[4]) + " Max " + float(list[5]));
   }
   else {
-    println(message);
+    println("TIME " + hour() + ":" + minute() + ":" + second() + " // " + message);
   }
 }
 void eventCall10(String call, int a, int b, int c, int d, int e, int f, int g, int h, int i) {

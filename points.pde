@@ -149,7 +149,7 @@ class Point {
     int steps = lengthConvertion(distance);
     //String command = "stepperInter " + steps + " " + 0.1 + " " + 0.97 + " " + 0.1 + " " + 0.0;
     
-    String command = "stepperInter " + steps;
+    String command = "stepperTranslate " + steps + " 500 500";
 
     if (val ==0){//motor 1
       udpBroadcastDirect(command, MOTORA);
