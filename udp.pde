@@ -5,7 +5,7 @@ UDP udp;  // the UDP object
 int INCOMING_PORT = 9999;//incoming port for host pc
 String BROADCAST_IP = "10.0.255.255";//this is the main brodcast port
 String IP = "10.0.2.10";//this is the main brodcast port
-int BROADCAST_PORT = 8888;//for casting to .255
+int BROADCAST_PORT = 2704;//for casting to .255
 
 
 void udpSetup(){
@@ -16,19 +16,19 @@ void udpSetup(){
 
 
 void udpBroadcast(String command){
-  int sendHowManyTimes = 1;
+  int sendHowManyTimes = 2;
   //int timeStamp = int((System.currentTimeMillis() - timeDiff) * 1000);
   int random = int(random(0,20000));
   println("Sent Command: " + command);
   for (int i=0; i < sendHowManyTimes; i++) {
     //udp.send(timeStamp + " " + command, "224.1.1.10", 2704);
-    udp.send(random + " " + command, BROADCAST_IP, 2704);
+    udp.send(random + " " + command, BROADCAST_IP, BROADCAST_PORT);
   }
 }
 void udpBroadcastDirect(String command, String ip){
   //int timeStamp = int((System.currentTimeMillis() - timeDiff) * 1000);
   int random = int(random(0,20000));
-  udp.send(random + " " + command, ip, 2704);
+  udp.send(random + " " + command, ip, BROADCAST_PORT);
   //udp.send(command, ip, 2704);
   println("Sent " + ip + " Command: " + command);
 }
@@ -66,7 +66,7 @@ void receive( byte[] data ) {       // <-- default handler
         p2.udpUpdate(float(list[3]), float(list[4]), float(list[5]), 1);
       }
       
-      println("max " + list[1] + "IP " + list[2] + "Length " + float(list[3]) + " Min " + float(list[4]) + " Max " + float(list[5]));
+      println("MAC " + list[1] + " IP " + list[2] + " Length " + float(list[3]) + " Min " + float(list[4]) + " Max " + float(list[5]));
   }
   if (list[0].equals("home")){
       String DEVICE_MAC = list[1];

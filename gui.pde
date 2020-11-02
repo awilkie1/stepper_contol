@@ -222,7 +222,8 @@ void minSlider(float minSlider){
   //tcpBroadcastDirect("setMin " + int(minSlider), CURRENTMOTOR);
 }
 void maxSlider(float maxSlider){
-  udpBroadcastDirect("setMax " + int(maxSlider), CURRENTMOTOR);
+  udpBroadcast("setMax " + int(maxSlider));
+  //udpBroadcastDirect("setMax " + int(maxSlider), CURRENTMOTOR);
   //tcpBroadcastDirect("setMax " + int(maxSlider), CURRENTMOTOR);
 }
 void partnerSlider(float partnerSlider){

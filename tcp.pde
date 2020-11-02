@@ -15,10 +15,8 @@ void tcp(){
   if (c.available() > 0) {
         tcpInput = c.readString();
         tcpData = int(split(tcpInput, ' ')); // Split values into an array
-     
         String message = tcpInput;
         println(message);
-
     }
 
 }

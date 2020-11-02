@@ -1,4 +1,4 @@
-class Point {
+ class Point {
 
   PVector position;    // position of pendulum ball
   PVector originb;      // position of arm origin
@@ -149,15 +149,27 @@ class Point {
     int steps = lengthConvertion(distance);
     //String command = "stepperInter " + steps + " " + 0.1 + " " + 0.97 + " " + 0.1 + " " + 0.0;
     
-    String command = "stepperTranslate " + steps + " 500 500";
+   String command = "stepperTranslate " + steps + " " + (700 * MICROSTEPPING) +  " " + (300 * MICROSTEPPING);
+   //String command = "stepperWave 0 0 500 10 1 " + steps + " " + (700 * MICROSTEPPING) +  " " + (300 * MICROSTEPPING);
+   
+   //String command = "stepperNumTranslate " + (700 * MICROSTEPPING) +  " " + (300 * MICROSTEPPING);
+   //for (int i=0; i < 30; i++){
+   // command = command  + " " + steps;
+   //}
+   
+    //String command = "stepperBounce " + steps + " " + (700 * MICROSTEPPING) +  " " + (300 * MICROSTEPPING) +  " 4 500";
+
+   //String command = "stepperSine " + steps + " " + (700 * MICROSTEPPING) +  " " + (300 * MICROSTEPPING + " 5 500");
 
     if (val ==0){//motor 1
       udpBroadcastDirect(command, MOTORA);
+      udpBroadcastDirect(command, MOTORC);
 
     }
     if (val ==1){//motor 1
       //stepperDirect(MOTORB, "abcd", steps, time);
       udpBroadcastDirect(command, MOTORB);
+      udpBroadcastDirect(command, MOTORD);
       //tcpBroadcastDirect(command, MOTORB);
 
     }
